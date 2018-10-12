@@ -1,8 +1,7 @@
 CXX=g++
 FLAGS=
 OUTPUT=test
-OBJ=main.cpp
-OBJS += $(OBJ)
+OBJS += main.o
 OBJS += brTreeFunc.o
 DEFINES=
 LIBS=
@@ -19,11 +18,16 @@ INCLUDEs=
 #depdep1:
 #	@echo depdep1
 
-test: brt
+test: $(OBJS)
 	$(CXX) $(OBJS) -o $(OUTPUT)
 
-brt:
-	$(CXX) -c brTreeFunc.cpp -o brTreeFunc.o
+%.o:%.cpp
+	$(CXX) $(FLAGS) -c $< -o $@
+
+
+#brt:
+#	$(CXX) -c brTreeFunc.cpp -o brTreeFunc.o
 
 clean:
+	rm *.o
 	rm $(OUTPUT)
