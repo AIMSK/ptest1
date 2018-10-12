@@ -13,7 +13,14 @@ int brNodeFunc :: insert_node(brNode * node)
 //-------------------------------------------------------------
 // class brTreeNode
 
-brTreeNode :: brTreeNode(){}
+brTreeNode :: brTreeNode()
+{
+    this->parent = NULL;
+    this->right = NULL;
+    this->left = NULL;
+    this->color = 0;
+    this->key = 0;
+}
 brTreeNode :: brTreeNode(bool color, int key)
 {
     this->parent = NULL;
@@ -28,14 +35,38 @@ int brTreeNode :: insert_node(brTreeNode * node, brTreeNode ** head)
 #ifdef DEBUG
     printf("br tree insert\n");
 #endif
+    brTreeNode * tmp;
+    if(*head == NULL) { *head = node; node->parent = NULL; return 0; };
+    tmp = *head; 
+    while(1)
+    {
+        if( node->key > tmp->key )
+        {
+            if( tmp->right == NULL ) { tmp->right = node; rebalance(node, head); return 0; }
+            else { tmp = tmp->right; }
+        }
+        else if ( node->key < tmp->key )
+        {
+            if( tmp->left == NULL ) { tmp->left = node; rebalance(node, head); return 0; }
+            else { tmp = tmp->left; }
+        }
+        else if( node->key == tmp->key ){ return 1; }
+    }
     return 0;
 }
+
+int brTreeNode :: rebalance(brTreeNode * node, brTreeNode ** head)
+{
+    return 0;
+}
+
 
 int brTreeNode :: delete_node(int key, brTreeNode ** head)
 {
 #ifdef DEBUG
     printf("br tree insert\n");
 #endif
+    brTreeNode * tmp;
     return 0;
 }
 
@@ -68,3 +99,13 @@ int brTreeNode :: right_rotate (brTreeNode * node, brTreeNode ** head)
     node->parent = tmp;
     return 0;
 }
+
+
+
+int brTreeNode :: print_tree(brTreeNode * head)
+{
+    if( head == NULL){ printf("null\n"); return 0;}
+
+    return 0; 
+}
+

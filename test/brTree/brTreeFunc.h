@@ -35,5 +35,7 @@ class brTreeNode
     int delete_node(int key, brTreeNode ** head);
     int right_rotate(brTreeNode * node, brTreeNode ** head);
     int left_rotate (brTreeNode * node, brTreeNode ** head);
+    int rebalance(brTreeNode * node, brTreeNode ** head);
+    int print_tree(brTreeNode * head);
         
 };
