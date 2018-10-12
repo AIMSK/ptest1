@@ -8,3 +8,16 @@ int brNodeFunc :: insert_node(brNode * node)
 #endif
     return 0;
 }
+
+
+//-------------------------------------------------------------
+// class brTreeNode
+
+int brTreeNode :: insert_node(brTreeNode * node)
+{
+#ifdef DEBUG
+    printf("br tree insert\n");
+#endif
+    return 0;
+}
+
