@@ -11,8 +11,8 @@ int brNodeFunc :: insert_node(brNode * node)
 
 //-------------------------------------------------------------
 // class linklistNode
-template 
-linklistNode :: linklistNode(Type_S elem)
+template <class Type_S> 
+linklistNode<Type_S> :: linklistNode(Type_S elem)
 {
     this.elem = elem;
 }

@@ -49,7 +49,7 @@ class brTreeNode
         
 };
 
-template <class Type_S>
+template <class Type_S> 
 class linklistNode
 {
     
@@ -60,5 +60,5 @@ class linklistNode
 
     public:
 
-    int linklistNode(Type_s elem);
+    linklistNode(Type_S elem);
 };
