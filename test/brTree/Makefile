@@ -1,5 +1,7 @@
 CXX=g++
 FLAGS=
+S_SRCS := $(wildcard ./*.cpp)
+S_OBJS =  $(patsubst %cpp, %o, $(S_SRCS))
 OUTPUT=test
 OBJS += main.o
 OBJS += brTreeFunc.o
@@ -24,6 +26,9 @@ test: $(OBJS)
 %.o:%.cpp
 	$(CXX) $(FLAGS) -c $< -o $@
 
+print: $(S_SRCS)
+    $(info $(S_SRCS))
+    $(info $(S_OBJS))
 
 #brt:
 #	$(CXX) -c brTreeFunc.cpp -o brTreeFunc.o
