@@ -29,6 +29,8 @@ class brTreeNode
 
     public:
 
+    brTreeNode(){};
+    brTreeNode(bool color);
     int insert_node(brTreeNode * node, brTreeNode ** head);
     int delete_node(int key, brTreeNode ** head);
         

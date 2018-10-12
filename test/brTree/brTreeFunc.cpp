@@ -13,6 +13,11 @@ int brNodeFunc :: insert_node(brNode * node)
 //-------------------------------------------------------------
 // class brTreeNode
 
+brTreeNode :: brTreeNode(bool color)
+{
+    this->color = BLACK;
+}
+
 int brTreeNode :: insert_node(brTreeNode * node, brTreeNode ** head)
 {
 #ifdef DEBUG

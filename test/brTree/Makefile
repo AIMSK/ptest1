@@ -15,6 +15,7 @@ FLAGS =
 debug: FLAGS += -D DEBUG
 debug: $(OBJS)
 	$(CXX) $(FLAGS) $(OBJS) -o $(OUTPUT)
+	@echo "---------------------------------------"
 
 $(OUTPUT): $(OBJS)
 	$(CXX) $(FLAGS) $(OBJS) -o $(OUTPUT)
