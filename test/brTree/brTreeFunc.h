@@ -29,7 +29,7 @@ class brTreeNode
 
     public:
 
-    int insert_node(brTreeNode * node);
-    int delete_node(int key);
+    int insert_node(brTreeNode * node, brTreeNode ** head);
+    int delete_node(int key, brTreeNode ** head);
         
 };

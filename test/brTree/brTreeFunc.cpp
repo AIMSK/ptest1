@@ -13,7 +13,7 @@ int brNodeFunc :: insert_node(brNode * node)
 //-------------------------------------------------------------
 // class brTreeNode
 
-int brTreeNode :: insert_node(brTreeNode * node)
+int brTreeNode :: insert_node(brTreeNode * node, brTreeNode ** head)
 {
 #ifdef DEBUG
     printf("br tree insert\n");
@@ -21,3 +21,10 @@ int brTreeNode :: insert_node(brTreeNode * node)
     return 0;
 }
 
+int brTreeNode :: delete_node(int key, brTreeNode ** head)
+{
+#ifdef DEBUG
+    printf("br tree insert\n");
+#endif
+    return 0;
+}
