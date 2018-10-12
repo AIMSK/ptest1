@@ -1,5 +1,8 @@
 #define RED   0
 #define BLACK 1
+
+class brTreeNode;
+
 typedef struct brNode_
 {
     brNode_ * parent;
@@ -8,6 +11,12 @@ typedef struct brNode_
     bool color;
     int key;
 }brNode;
+
+typedef struct llNode_
+{
+    brTreeNode * elem;
+    llNode_ * next;
+}llNode;
 
 class brNodeFunc
 {
@@ -38,4 +47,18 @@ class brTreeNode
     int rebalance(brTreeNode * node, brTreeNode ** head);
     int print_tree(brTreeNode * head);
         
+};
+
+template <class Type_S>
+class linklistNode
+{
+    
+    public: 
+
+    Type_S elem;
+    linklistNode * next;
+
+    public:
+
+    int linklistNode(Type_s elem);
 };

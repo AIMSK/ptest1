@@ -9,6 +9,13 @@ int brNodeFunc :: insert_node(brNode * node)
     return 0;
 }
 
+//-------------------------------------------------------------
+// class linklistNode
+template 
+linklistNode :: linklistNode(Type_S elem)
+{
+    this.elem = elem;
+}
 
 //-------------------------------------------------------------
 // class brTreeNode
@@ -104,8 +111,8 @@ int brTreeNode :: right_rotate (brTreeNode * node, brTreeNode ** head)
 
 int brTreeNode :: print_tree(brTreeNode * head)
 {
-    if( head == NULL){ printf("null\n"); return 0;}
-
+    if( head == NULL){ printf("null\n"); return 0; }
+    
     return 0; 
 }
 
