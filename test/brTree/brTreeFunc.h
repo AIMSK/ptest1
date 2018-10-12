@@ -26,12 +26,14 @@ class brTreeNode
     bool color;
     int key;
 
-
     public:
 
-    brTreeNode(){};
-    brTreeNode(bool color);
-    int insert_node(brTreeNode * node, brTreeNode ** head);
+    //brTreeNode(){};
+    brTreeNode();
+    brTreeNode(bool color, int key);
+    int insert_node (brTreeNode * node, brTreeNode ** head);
     int delete_node(int key, brTreeNode ** head);
+    int right_rotate(brTreeNode * node, brTreeNode ** head);
+    int left_rotate (brTreeNode * node, brTreeNode ** head);
         
 };
