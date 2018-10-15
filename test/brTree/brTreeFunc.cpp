@@ -32,9 +32,9 @@ brTreeNode :: brTreeNode(bool color, int key)
 
 int brTreeNode :: insert_node(brTreeNode * node, brTreeNode ** head)
 {
-#ifdef DEBUG
-    printf("br tree insert\n");
-#endif
+//#ifdef DEBUG
+//    printf("br tree insert\n");
+//#endif
     brTreeNode * tmp;
     if(*head == NULL) { *head = node; node->parent = NULL; return 0; };
     tmp = *head; 

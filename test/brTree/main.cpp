@@ -27,6 +27,8 @@ int main(int argc, char ** argv)
     tmp->insert_node(tmp, &head);
     tmp = new brTreeNode(BLACK, 6);
     tmp->insert_node(tmp, &head);
+    tmp = new brTreeNode(BLACK, 11);
+    tmp->insert_node(tmp, &head);
     tmp->print_tree(head);
     delete tmp;
     //test1();
