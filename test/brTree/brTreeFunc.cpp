@@ -21,7 +21,7 @@ brTreeNode :: brTreeNode()
     this->color = 0;
     this->key = 0;
 }
-brTreeNode :: brTreeNode(bool color, int key)
+brTreeNode :: brTreeNode( int key )
 {
     this->parent = NULL;
     this->right = NULL;
@@ -36,8 +36,9 @@ int brTreeNode :: insert_node(brTreeNode * node, brTreeNode ** head)
 //    printf("br tree insert\n");
 //#endif
     brTreeNode * tmp;
-    if(*head == NULL) { *head = node; node->parent = NULL; return 0; };
+    if(*head == NULL) { *head = node; node->parent = NULL; node->color = BLACK; return 0; };
     tmp = *head; 
+    node -> color = RED;
     while(1)
     {
         if( node->key > tmp->key )
@@ -57,15 +58,33 @@ int brTreeNode :: insert_node(brTreeNode * node, brTreeNode ** head)
 
 int brTreeNode :: rebalance(brTreeNode * node, brTreeNode ** head)
 {
+    if ( node -> parent == NULL ){ return 1; }
+    //if ( node -> parent -> color == BLACK ){ return 0 ; }
+    else
+    {
+        
+    }
     return 0;
 }
 
+int brTreeNode :: balance_one(brTreeNode * node, brTreeNode * node_pre)
+{
+    if ( node -> parent -> color == BLACK ) { node_pre = NULL; }
+    else 
+    {
+        if( node -> parent  == node -> parent -> parent -> left) 
+        {
+            
+        }
+    }
+    return 0;
+}
 
 int brTreeNode :: delete_node(int key, brTreeNode ** head)
 {
-#ifdef DEBUG
-    printf("br tree insert\n");
-#endif
+//#ifdef DEBUG
+//    printf("br tree insert\n");
+//#endif
     brTreeNode * tmp;
     return 0;
 }
