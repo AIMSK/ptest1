@@ -17,6 +17,26 @@ linklistNode<Type_S> :: linklistNode(Type_S elem)
     this.elem = elem;
 }
 
+template <class Type_S> 
+linklistNode<Type_S> * linklistNode<Type_S> :: push_back(Type_S head)
+{
+    
+    return 0;
+}
+
+template <class Type_S> 
+linklistNode<Type_S> * linklistNode<Type_S> :: pop_front(Type_S head)
+{
+    if( head -> next == NULL ) { return NULL; }
+    else 
+    { 
+        linklistNode<Type_S> * tmp;
+        tmp = head -> next;
+        head -> next = head -> next -> next;
+        return tmp;
+    }
+    return 0;
+}
 //-------------------------------------------------------------
 // class brTreeNode
 
