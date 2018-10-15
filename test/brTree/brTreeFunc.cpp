@@ -18,24 +18,30 @@ linklistNode<Type_S> :: linklistNode(Type_S elem)
 }
 
 template <class Type_S> 
-linklistNode<Type_S> * linklistNode<Type_S> :: push_back(Type_S head)
+int linklistNode<Type_S> :: push_back( Type_S elem )
 {
-    
+    linklistNode<Type_S> * tmp = this; 
+    linklistNode<Type_S> * tar = new linklistNode( elem );
+    while (tmp->next != NULL){ tmp = tmp -> next; }
+    tmp->next = tar;
     return 0;
 }
 
 template <class Type_S> 
-linklistNode<Type_S> * linklistNode<Type_S> :: pop_front(Type_S head)
+Type_S linklistNode<Type_S> :: pop_front()
 {
+    linklistNode<Type_S> * head = this; 
+    Type_S elem;
     if( head -> next == NULL ) { return NULL; }
     else 
     { 
         linklistNode<Type_S> * tmp;
         tmp = head -> next;
+        elem = tmp -> elem;
         head -> next = head -> next -> next;
-        return tmp;
+        delete tmp;
+        return elem;
     }
-    return 0;
 }
 //-------------------------------------------------------------
 // class brTreeNode

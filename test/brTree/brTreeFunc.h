@@ -61,7 +61,7 @@ class linklistNode
     public:
 
     linklistNode(Type_S elem);
-    linklistNode<Type_S> * push_back(Type_S elem);
-    linklistNode<Type_S> * pop_front(Type_S elem);
+    int push_back( Type_S elem );
+    Type_S pop_front();
 
 };

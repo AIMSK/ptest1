@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "brTreeFunc.h"
+void test1();
 int main(int argc, char ** argv)
 {
     //brNode * tmp;
@@ -14,4 +15,8 @@ int main(int argc, char ** argv)
     head = tmp;
     tmp = new brTreeNode(BLACK, 10);
     return 0;
+}
+
+void test1()
+{
 }
