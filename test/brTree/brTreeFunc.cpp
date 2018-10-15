@@ -74,11 +74,12 @@ int brTreeNode :: delete_node(int key, brTreeNode ** head)
 int brTreeNode :: left_rotate(brTreeNode * node, brTreeNode ** head)
 {
     brTreeNode * tmp;
+    if( node->right == NULL ) { printf("left rotate fail"); return 1; }
     tmp = node->right;
     node->right = tmp->left;
-    if(node->right != NULL){ node->right->parent = node; }
+    if( node->right != NULL ){ node->right->parent = node; }
     tmp->parent = node->parent;
-    if(node->parent == NULL) { *head = tmp; }
+    if( node->parent == NULL ) { *head = tmp; }
     else if( node == node->parent->left ){ node->parent->left = tmp; }
     else { node->parent->right = tmp; }
     tmp->left = node;
@@ -88,11 +89,12 @@ int brTreeNode :: left_rotate(brTreeNode * node, brTreeNode ** head)
 int brTreeNode :: right_rotate (brTreeNode * node, brTreeNode ** head)
 {
     brTreeNode * tmp;
+    if( node->left == NULL ) { printf("right rotate fail"); return 1; }
     tmp = node->left;
     node->left = tmp->right;
-    if(node->left != NULL){ node->left->parent = node; }
+    if( node->left != NULL ){ node->left->parent = node; }
     tmp->parent = node->parent;
-    if(node->parent == NULL) { *head = tmp; }
+    if( node->parent == NULL ) { *head = tmp; }
     else if( node == node->parent->left ){ node->parent->left = tmp; }
     else { node->parent->right = tmp; }
     tmp->right = node;

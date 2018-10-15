@@ -11,6 +11,7 @@ int main(int argc, char ** argv)
 #endif
     brNodeFunc brt;
     brTreeNode * head;
+    brTreeNode * tmp2;
     brTreeNode * tmp = new brTreeNode(BLACK, 5);
     head = tmp;
     tmp = new brTreeNode(BLACK, 10);
@@ -20,6 +21,7 @@ int main(int argc, char ** argv)
     tmp = new brTreeNode(BLACK, 4);
     tmp->insert_node(tmp, &head);
     tmp = new brTreeNode(BLACK, 12);
+    tmp2 = tmp;
     tmp->insert_node(tmp, &head);
     tmp = new brTreeNode(BLACK, 19);
     tmp->insert_node(tmp, &head);
@@ -29,6 +31,11 @@ int main(int argc, char ** argv)
     tmp->insert_node(tmp, &head);
     tmp = new brTreeNode(BLACK, 11);
     tmp->insert_node(tmp, &head);
+
+    tmp->print_tree(head);
+    //tmp->left_rotate(tmp2, &head);
+    tmp->right_rotate(tmp2, &head);
+
     tmp->print_tree(head);
     delete tmp;
     //test1();
