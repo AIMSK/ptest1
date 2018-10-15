@@ -69,16 +69,28 @@ int brTreeNode :: rebalance(brTreeNode * node, brTreeNode ** head)
 
 int brTreeNode :: balance_one(brTreeNode * node, brTreeNode * node_pre)
 {
+    brTreeNode * uncle;
     if ( node -> parent -> color == BLACK ) { node_pre = NULL; }
     else 
     {
-        if( node -> parent  == node -> parent -> parent -> left) 
+        uncle  = node -> get_uncle( node );
+        if ( uncle -> color == RED )
         {
-            
+            node -> parent -> color = BLACK; 
+            uncle -> color;
         }
+        else {}
     }
     return 0;
 }
+
+brTreeNode * brTreeNode :: get_uncle ( brTreeNode * node)
+{
+    if( node -> parent == NULL || node -> parent -> parent == NULL || node == NULL ){ return NULL; }
+    if( node -> parent  == node -> parent -> parent -> left ){ return node -> parent -> parent -> right; }
+    else { return node -> parent -> parent -> left; }
+}
+
 
 int brTreeNode :: delete_node(int key, brTreeNode ** head)
 {
