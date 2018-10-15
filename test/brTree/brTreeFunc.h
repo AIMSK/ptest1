@@ -45,7 +45,7 @@ class brTreeNode
     int right_rotate(brTreeNode * node, brTreeNode ** head);
     int left_rotate (brTreeNode * node, brTreeNode ** head);
     int rebalance(brTreeNode * node, brTreeNode ** head);
-    int balance_one(brTreeNode * node, brTreeNode * node_pre);
+    brTreeNode * balance_one(brTreeNode * node, brTreeNode ** head );
     int print_tree(brTreeNode * head);
     brTreeNode * get_uncle ( brTreeNode * node);
         
