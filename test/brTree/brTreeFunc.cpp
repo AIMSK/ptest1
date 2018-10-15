@@ -10,39 +10,6 @@ int brNodeFunc :: insert_node(brNode * node)
 }
 
 //-------------------------------------------------------------
-// class linklistNode
-template <class Type_S> 
-linklistNode<Type_S> :: linklistNode(Type_S elem)
-{
-    this.elem = elem;
-}
-
-template <class Type_S> 
-int linklistNode<Type_S> :: push_back( Type_S elem )
-{
-    linklistNode<Type_S> * tmp = this; 
-    linklistNode<Type_S> * tar = new linklistNode( elem );
-    while (tmp->next != NULL){ tmp = tmp -> next; }
-    tmp->next = tar;
-    return 0;
-}
-
-template <class Type_S> 
-Type_S linklistNode<Type_S> :: pop_front()
-{
-    linklistNode<Type_S> * head = this; 
-    Type_S elem;
-    if( head -> next == NULL ) { return NULL; }
-    else 
-    { 
-        linklistNode<Type_S> * tmp;
-        tmp = head -> next;
-        elem = tmp -> elem;
-        head -> next = head -> next -> next;
-        delete tmp;
-        return elem;
-    }
-}
 //-------------------------------------------------------------
 // class brTreeNode
 
@@ -75,12 +42,12 @@ int brTreeNode :: insert_node(brTreeNode * node, brTreeNode ** head)
     {
         if( node->key > tmp->key )
         {
-            if( tmp->right == NULL ) { tmp->right = node; rebalance(node, head); return 0; }
+            if( tmp->right == NULL ) { tmp->right = node; node->parent = tmp; rebalance(node, head); return 0; }
             else { tmp = tmp->right; }
         }
         else if ( node->key < tmp->key )
         {
-            if( tmp->left == NULL ) { tmp->left = node; rebalance(node, head); return 0; }
+            if( tmp->left == NULL ) { tmp->left = node; node->parent = tmp; rebalance(node, head); return 0; }
             else { tmp = tmp->left; }
         }
         else if( node->key == tmp->key ){ return 1; }
@@ -137,8 +104,25 @@ int brTreeNode :: right_rotate (brTreeNode * node, brTreeNode ** head)
 
 int brTreeNode :: print_tree(brTreeNode * head)
 {
+    linklistNode<brTreeNode *> fifo(NULL); 
+    brTreeNode * tmp;
+    int n = 0;
     if( head == NULL){ printf("null\n"); return 0; }
-    
+    fifo.push_back(head);
+    fifo.push_back(NULL);
+    while(fifo.pop_front(&tmp))
+    {
+        if( tmp == NULL ) { if(n ==1) { return 0; }else { fifo.push_back(NULL); printf("\n"); n ++; }}
+        else 
+        {
+            n = 0;
+            if(tmp->parent != NULL){ printf(" %d(%d) ", tmp->key, tmp->parent->key); }
+            else { printf(" %d(null) ", tmp->key); }
+            if( tmp->left != NULL ){ fifo.push_back(tmp->left); }
+            if( tmp->right != NULL){ fifo.push_back(tmp->right); }
+        } 
+    }
+
     return 0; 
 }
 
