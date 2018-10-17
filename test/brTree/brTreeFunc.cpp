@@ -70,17 +70,20 @@ int brTreeNode :: rebalance(brTreeNode * node, brTreeNode ** head)
 brTreeNode * brTreeNode :: balance_one(brTreeNode * node, brTreeNode ** head )
 {
     brTreeNode * uncle;
-    if ( node -> parent == NULL ) { node -> BLACK; * head = node; return NULL; }
+    if ( node -> parent == NULL ) { node -> color =  BLACK; * head = node; return NULL; }
     if ( node -> parent -> color == BLACK ) { return NULL; }
     else 
     {
         uncle  = node -> get_uncle( node );
-        if ( uncle -> color == RED ){ node -> parent -> color = BLACK; uncle -> color; return node -> parent -> parent; }
+        if ( uncle -> color == RED ){ node -> parent -> color = BLACK; uncle -> color = BLACK; return node -> parent -> parent; }
         else 
         {
-            if ( node == node -> parent -> right )
+            if ( is_left( node -> parent ) == true )
             {
-                node.left_rotate( node -> parent, head );
+                if( is_left( node ) == false ) { node -> left_rotate( node -> parent, head ); } 
+                node -> color = BLACK; 
+                node -> parent -> color = RED;
+
             }
             
         }
@@ -94,6 +97,14 @@ brTreeNode * brTreeNode :: get_uncle ( brTreeNode * node )
     if( node -> parent  == node -> parent -> parent -> left ){ return node -> parent -> parent -> right; }
     else { return node -> parent -> parent -> left; }
 }
+
+bool brTreeNode :: is_left ( brTreeNode * node ) //optm
+{
+    if( node -> parent == NULL ) { return true; }
+    if( node -> parent -> left == node ) { return true; }
+    else { return false; } 
+}
+
 
 
 int brTreeNode :: delete_node(int key, brTreeNode ** head)

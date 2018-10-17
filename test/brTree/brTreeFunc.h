@@ -48,6 +48,7 @@ class brTreeNode
     brTreeNode * balance_one(brTreeNode * node, brTreeNode ** head );
     int print_tree(brTreeNode * head);
     brTreeNode * get_uncle ( brTreeNode * node);
+    bool is_left ( brTreeNode * node );
         
 };
 
