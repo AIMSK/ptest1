@@ -58,11 +58,23 @@ int brTreeNode :: insert_node(brTreeNode * node, brTreeNode ** head)
 
 int brTreeNode :: rebalance(brTreeNode * node, brTreeNode ** head)
 {
-    if ( node -> parent == NULL ){ return 1; }
-    //if ( node -> parent -> color == BLACK ){ return 0 ; }
+    brTreeNode * tmp;
+    //printf("--insert--%d-%d-%d-\n", node->key, node->parent->color, node->parent->key);
+    if ( node -> parent == NULL ){ return 0 ; }
+    if ( node -> parent -> color == BLACK ){ 
+        //printf("-pb-%d-%d-\n", node->key, node->color); 
+        return 0 ; }
     else
     {
-        
+        tmp = node; 
+        do
+        {    
+            //printf("--%d--\n", tmp->key);
+            tmp = balance_one( tmp, head );
+            print_tree(*head);
+            //printf("--%d--%d--\n", tmp->key, tmp->color);
+        } 
+        while ( tmp == NULL );
     }
     return 0;
 }
@@ -70,7 +82,7 @@ int brTreeNode :: rebalance(brTreeNode * node, brTreeNode ** head)
 brTreeNode * brTreeNode :: balance_one(brTreeNode * node, brTreeNode ** head )
 {
     brTreeNode * uncle;
-    if ( node -> parent == NULL ) { node -> color =  BLACK; * head = node; return NULL; }
+    //if ( node -> parent == NULL ) { node -> color =  BLACK; * head = node; return NULL; }
     if ( node -> parent -> color == BLACK ) { return NULL; }
     else 
     {
@@ -80,10 +92,19 @@ brTreeNode * brTreeNode :: balance_one(brTreeNode * node, brTreeNode ** head )
         {
             if ( is_left( node -> parent ) == true )
             {
-                if( is_left( node ) == false ) { node -> left_rotate( node -> parent, head ); } 
+                if( is_left( node ) == false ) { node -> left_rotate( node -> parent, head ); } //bang zhi
                 node -> color = BLACK; 
                 node -> parent -> color = RED;
-
+                node -> right_rotate( node -> parent , head );
+                return NULL;
+            }
+            else 
+            {
+                if( is_left( node ) == true ) { node -> right_rotate( node -> parent, head ); } //bang zhi
+                node -> color = BLACK; 
+                node -> parent -> color = RED;
+                node -> left_rotate( node -> parent , head );
+                return NULL;
             }
             
         }
@@ -125,7 +146,7 @@ int brTreeNode :: left_rotate(brTreeNode * node, brTreeNode ** head)
     node->right = tmp->left;
     if( node->right != NULL ){ node->right->parent = node; }
     tmp->parent = node->parent;
-    if( node->parent == NULL ) { *head = tmp; }
+    if( node->parent == NULL ) { tmp -> color = BLACK; *head = tmp; }
     else if( node == node->parent->left ){ node->parent->left = tmp; }
     else { node->parent->right = tmp; }
     tmp->left = node;
@@ -140,7 +161,7 @@ int brTreeNode :: right_rotate (brTreeNode * node, brTreeNode ** head)
     node->left = tmp->right;
     if( node->left != NULL ){ node->left->parent = node; }
     tmp->parent = node->parent;
-    if( node->parent == NULL ) { *head = tmp; }
+    if( node->parent == NULL ) { tmp -> color = BLACK; *head = tmp; }
     else if( node == node->parent->left ){ node->parent->left = tmp; }
     else { node->parent->right = tmp; }
     tmp->right = node;
@@ -155,6 +176,7 @@ int brTreeNode :: print_tree(brTreeNode * head)
     linklistNode<brTreeNode *> fifo(NULL); 
     brTreeNode * tmp;
     int n = 0;
+    printf("------------------------\n");
     if( head == NULL){ printf("null\n"); return 0; }
     fifo.push_back(head);
     fifo.push_back(NULL);
@@ -164,8 +186,8 @@ int brTreeNode :: print_tree(brTreeNode * head)
         else 
         {
             n = 0;
-            if(tmp->parent != NULL){ printf(" %d(%d) ", tmp->key, tmp->parent->key); }
-            else { printf(" %d(null) ", tmp->key); }
+            if(tmp->parent != NULL){ printf(" %d(%d)%d ", tmp->key, tmp->parent->key, tmp -> color); }
+            else { printf(" %d(null)%d ", tmp->key, tmp->color); }
             if( tmp->left != NULL ){ fifo.push_back(tmp->left); }
             if( tmp->right != NULL){ fifo.push_back(tmp->right); }
         } 

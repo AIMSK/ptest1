@@ -14,6 +14,7 @@ int main(int argc, char ** argv)
     brTreeNode * tmp2;
     brTreeNode * tmp = new brTreeNode(5);
     head = tmp;
+    head -> color = BLACK;
     tmp = new brTreeNode(10);
     tmp->insert_node(tmp, &head);
     tmp = new brTreeNode(2);
