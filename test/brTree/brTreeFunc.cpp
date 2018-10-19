@@ -35,31 +35,44 @@ int brTreeNode :: insert_node(brTreeNode * node, brTreeNode ** head)
 //#ifdef DEBUG
 //    printf("br tree insert\n");
 //#endif
+    //print_tree(*head);
     brTreeNode * tmp;
     if(*head == NULL) { *head = node; node->parent = NULL; node->color = BLACK; return 0; };
     tmp = *head; 
     node -> color = RED;
+    print_tree(*head);
     while(1)
     {
         if( node->key > tmp->key )
         {
-            if( tmp->right == NULL ) { tmp->right = node; node->parent = tmp; rebalance(node, head); return 0; }
+            if( tmp->right == NULL ) 
+            {
+                tmp->right = node; node->parent = tmp; 
+                //rebalance(node, head); 
+                break; 
+            }
             else { tmp = tmp->right; }
         }
         else if ( node->key < tmp->key )
         {
-            if( tmp->left == NULL ) { tmp->left = node; node->parent = tmp; rebalance(node, head); return 0; }
+            if( tmp->left == NULL ) 
+            { 
+                tmp->left = node; node->parent = tmp; 
+                //rebalance(node, head); 
+                break; 
+            }
             else { tmp = tmp->left; }
         }
         else if( node->key == tmp->key ){ return 1; }
     }
+    rebalance(node, head); 
     return 0;
 }
 
 int brTreeNode :: rebalance(brTreeNode * node, brTreeNode ** head)
 {
     brTreeNode * tmp;
-    //printf("--insert--%d-%d-%d-\n", node->key, node->parent->color, node->parent->key);
+    //printf("--rebalance--%d-%d-%d-\n", node->key, node->parent->color, node->parent->key);
     if ( node -> parent == NULL ){ return 0 ; }
     if ( node -> parent -> color == BLACK ){ 
         //printf("-pb-%d-%d-\n", node->key, node->color); 
@@ -69,47 +82,53 @@ int brTreeNode :: rebalance(brTreeNode * node, brTreeNode ** head)
         tmp = node; 
         do
         {    
-            //printf("--%d--\n", tmp->key);
             tmp = balance_one( tmp, head );
-            print_tree(*head);
+            //if( tmp != NULL) { printf("---bo fin--%d--\n", tmp->key); }
+            //print_tree(*head);
             //printf("--%d--%d--\n", tmp->key, tmp->color);
         } 
-        while ( tmp == NULL );
+        while ( tmp != NULL );
     }
+    //print_tree(*head);
+    //printf("--rebalance fin-%d-\n", node->key);
     return 0;
 }
 
 brTreeNode * brTreeNode :: balance_one(brTreeNode * node, brTreeNode ** head )
 {
     brTreeNode * uncle;
-    //if ( node -> parent == NULL ) { node -> color =  BLACK; * head = node; return NULL; }
+    //printf("---bo--%d--\n", node->key );
+    if ( node -> parent == NULL ) { node -> color =  BLACK; * head = node; return NULL; }
     if ( node -> parent -> color == BLACK ) { return NULL; }
     else 
     {
         uncle  = node -> get_uncle( node );
-        if ( uncle -> color == RED ){ node -> parent -> color = BLACK; uncle -> color = BLACK; return node -> parent -> parent; }
+        if ( uncle != NULL ) 
+        {
+            if ( uncle -> color == RED ){ node -> parent -> color = BLACK; uncle -> color = BLACK; node -> parent -> parent ->color = RED; return node -> parent -> parent; }
+        }
+
+        if ( is_left( node -> parent ) == true )
+        {
+            if( is_left( node ) == false ) { node -> left_rotate( node -> parent, head ); } //bang zhi
+            else { node = node -> parent; }
+            node -> color = BLACK; 
+            node -> parent -> color = RED;
+            node -> right_rotate( node -> parent , head );
+            return NULL;
+        }
         else 
         {
-            if ( is_left( node -> parent ) == true )
-            {
-                if( is_left( node ) == false ) { node -> left_rotate( node -> parent, head ); } //bang zhi
-                node -> color = BLACK; 
-                node -> parent -> color = RED;
-                node -> right_rotate( node -> parent , head );
-                return NULL;
-            }
-            else 
-            {
-                if( is_left( node ) == true ) { node -> right_rotate( node -> parent, head ); } //bang zhi
-                node -> color = BLACK; 
-                node -> parent -> color = RED;
-                node -> left_rotate( node -> parent , head );
-                return NULL;
-            }
-            
+            if( is_left( node ) == true ) { node -> right_rotate( node -> parent, head ); } //bang zhi
+            else { node = node -> parent; }
+            node -> color = BLACK; 
+            node -> parent -> color = RED;
+            node -> left_rotate( node -> parent , head );
+            return NULL;
         }
+        
     }
-    return 0;
+    return NULL;
 }
 
 brTreeNode * brTreeNode :: get_uncle ( brTreeNode * node )
@@ -141,22 +160,27 @@ int brTreeNode :: delete_node(int key, brTreeNode ** head)
 int brTreeNode :: left_rotate(brTreeNode * node, brTreeNode ** head)
 {
     brTreeNode * tmp;
+    //printf("left ro--%d\n", node->key );
     if( node->right == NULL ) { printf("left rotate fail"); return 1; }
     tmp = node->right;
     node->right = tmp->left;
     if( node->right != NULL ){ node->right->parent = node; }
     tmp->parent = node->parent;
+    //printf("left 2ro--%d\n", node->key );
     if( node->parent == NULL ) { tmp -> color = BLACK; *head = tmp; }
     else if( node == node->parent->left ){ node->parent->left = tmp; }
     else { node->parent->right = tmp; }
+    //printf("left 3ro--%d\n", node->key );
     tmp->left = node;
     node->parent = tmp;
+    //printf("left 4ro--%d\n", node->key );
     return 0;
 }
 int brTreeNode :: right_rotate (brTreeNode * node, brTreeNode ** head)
 {
     brTreeNode * tmp;
-    if( node->left == NULL ) { printf("right rotate fail"); return 1; }
+    //printf("right ro--\n");
+    if( node->left == NULL ) { return 1; }
     tmp = node->left;
     node->left = tmp->right;
     if( node->left != NULL ){ node->left->parent = node; }
