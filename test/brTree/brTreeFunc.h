@@ -40,6 +40,7 @@ class brTreeNode
     //brTreeNode(){};
     brTreeNode();
     brTreeNode( int key );
+    int init_head(int key, brTreeNode ** head);
     int insert_node (brTreeNode * node, brTreeNode ** head);
     int delete_node(int key, brTreeNode ** head);
     int right_rotate(brTreeNode * node, brTreeNode ** head);

@@ -12,33 +12,14 @@ int main(int argc, char ** argv)
     brNodeFunc brt;
     brTreeNode * head;
     brTreeNode * tmp2;
-    brTreeNode * tmp = new brTreeNode(5);
-    head = tmp;
-    head -> color = BLACK;
-    tmp = new brTreeNode(6);
-    tmp->insert_node(tmp, &head);
-    tmp = new brTreeNode(7);
-    tmp->insert_node(tmp, &head);
-    tmp = new brTreeNode(8);
-    tmp->insert_node(tmp, &head);
-    tmp = new brTreeNode(9);
-    tmp2 = tmp;
-    tmp->insert_node(tmp, &head);
-    tmp = new brTreeNode(10);
-    tmp->insert_node(tmp, &head);
-    tmp = new brTreeNode(11);
-    tmp->insert_node(tmp, &head);
-    tmp = new brTreeNode(12);
-    tmp->insert_node(tmp, &head);
-    tmp = new brTreeNode(13);
-    tmp->insert_node(tmp, &head);
+    head -> init_head(1, &head);
+    for(int i = 2; i < 40; i++)
+    {
+        head -> insert_node(new brTreeNode(i), &head);
+    }
 
-    tmp->print_tree(head);
-    //tmp->left_rotate(tmp2, &head);
-    //tmp->right_rotate(tmp2, &head);
-
-    //tmp->print_tree(head);
-    delete tmp;
+    head -> print_tree(head);
+    //delete tmp;
     //test1();
     return 0;
 }

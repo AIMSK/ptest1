@@ -30,6 +30,14 @@ brTreeNode :: brTreeNode( int key )
     this->key = key;
 }
 
+    
+int brTreeNode :: init_head(int key, brTreeNode ** head)
+{
+    * head = new brTreeNode(key);
+    (* head) -> color = BLACK;
+    return 0;
+}
+
 int brTreeNode :: insert_node(brTreeNode * node, brTreeNode ** head)
 {
 //#ifdef DEBUG
@@ -40,7 +48,7 @@ int brTreeNode :: insert_node(brTreeNode * node, brTreeNode ** head)
     if(*head == NULL) { *head = node; node->parent = NULL; node->color = BLACK; return 0; };
     tmp = *head; 
     node -> color = RED;
-    print_tree(*head);
+    //print_tree(*head);
     while(1)
     {
         if( node->key > tmp->key )
