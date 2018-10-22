@@ -102,6 +102,12 @@ int brTreeNode :: rebalance_insert(brTreeNode * node, brTreeNode ** head)
     return 0;
 }
 
+int brTreeNode :: rebalance_delete(brTreeNode * node, brTreeNode ** head)
+{
+    return 0;
+}
+
+
 brTreeNode * brTreeNode :: balance_one_red(brTreeNode * node, brTreeNode ** head )
 {
     brTreeNode * uncle;
@@ -139,6 +145,12 @@ brTreeNode * brTreeNode :: balance_one_red(brTreeNode * node, brTreeNode ** head
     return NULL;
 }
 
+brTreeNode * brTreeNode :: balance_one_black(brTreeNode * node, brTreeNode ** head )
+{
+    
+    return NULL;
+}
+
 inline brTreeNode * brTreeNode :: get_uncle ( brTreeNode * node )
 {
     if( node -> parent == NULL || node -> parent -> parent == NULL || node == NULL ){ return NULL; }
@@ -173,8 +185,51 @@ brTreeNode * brTreeNode :: find_node(int key, brTreeNode * head)
 int brTreeNode :: delete_node(brTreeNode * node, brTreeNode ** head)
 {
     //if()
-
+    brTreeNode * tmp; 
+    if( node -> right != NULL && node -> left != NULL ){ tmp = this -> find_hjnode_exchange( node ); }
+    if ( tmp -> color == RED )
+    {
+        tmp = this -> delete_node_only( tmp, head );
+    }
+    else
+    {
+        if( )
+    }
     return 0;
+}
+
+brTreeNode *  brTreeNode :: delete_node_only( brTreeNode * tmp, brTreeNode ** head )
+{
+    brTreeNode * node; 
+    node = tmp -> parent; 
+    if( tmp -> right == NULL && tmp -> left == NULL )
+    {
+        if( tmp -> parent -> right == tmp) { tmp -> parent -> right == NULL; delete tmp; }
+        else { tmp -> parent -> left == NULL; delete tmp; }
+    }
+    else if( tmp -> right != NULL ) 
+    {
+        if( tmp -> parent -> right == tmp) { tmp -> parent -> right = tmp -> right; tmp -> right -> parent = tmp -> parent; delete tmp; }
+        else { tmp -> parent -> left == tmp -> right; tmp -> right -> parent = tmp -> parent; delete tmp; }
+    }
+    else if( tmp -> left != NULL )
+    {
+        if( tmp -> parent -> right == tmp) { tmp -> parent -> right = tmp -> left; tmp -> left -> parent = tmp -> parent; delete tmp; }
+        else { tmp -> parent -> left == tmp -> left; tmp -> left -> parent = tmp -> parent; delete tmp; }
+    }
+    return node;
+}
+
+brTreeNode * brTreeNode :: find_hjnode_exchange( brTreeNode * node )
+{
+    brTreeNode * tmp; 
+    tmp = node -> right;
+    while( tmp != NULL )
+    {
+        if ( tmp -> left == NULL) { node -> key = tmp -> key; this->copy_node (node, tmp); return tmp; }
+        else { tmp = tmp -> left; }
+    }
+    return NULL;
 }
 
 
@@ -242,3 +297,7 @@ int brTreeNode :: print_tree(brTreeNode * head)
     return 0; 
 }
 
+int brTreeNode :: copy_node( brTreeNode * dst, brTreeNode * src )
+{
+    return 0;
+}

@@ -44,13 +44,19 @@ class brTreeNode
     int insert_node (brTreeNode * node, brTreeNode ** head);
     brTreeNode * find_node(int key, brTreeNode * head);
     int delete_node(brTreeNode * node, brTreeNode ** head);
+    brTreeNode * delete_node_only( brTreeNode * tmp, brTreeNode ** head );
     int right_rotate(brTreeNode * node, brTreeNode ** head);
     int left_rotate (brTreeNode * node, brTreeNode ** head);
     int rebalance_insert(brTreeNode * node, brTreeNode ** head);
+    int rebalance_delete(brTreeNode * node, brTreeNode ** head);
     brTreeNode * balance_one_red (brTreeNode * node, brTreeNode ** head );
+    brTreeNode * balance_one_black (brTreeNode * node, brTreeNode ** head );
     int print_tree(brTreeNode * head);
     brTreeNode * get_uncle ( brTreeNode * node);
     bool is_left ( brTreeNode * node );
+    brTreeNode * find_hjnode_exchange( brTreeNode * node );
+
+    virtual int copy_node( brTreeNode * dst, brTreeNode * src);
         
 };
 
