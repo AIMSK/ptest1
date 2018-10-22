@@ -42,11 +42,12 @@ class brTreeNode
     brTreeNode( int key );
     int init_head(int key, brTreeNode ** head);
     int insert_node (brTreeNode * node, brTreeNode ** head);
-    int delete_node(int key, brTreeNode ** head);
+    brTreeNode * find_node(int key, brTreeNode * head);
+    int delete_node(brTreeNode * node, brTreeNode ** head);
     int right_rotate(brTreeNode * node, brTreeNode ** head);
     int left_rotate (brTreeNode * node, brTreeNode ** head);
-    int rebalance(brTreeNode * node, brTreeNode ** head);
-    brTreeNode * balance_one(brTreeNode * node, brTreeNode ** head );
+    int rebalance_insert(brTreeNode * node, brTreeNode ** head);
+    brTreeNode * balance_one_red (brTreeNode * node, brTreeNode ** head );
     int print_tree(brTreeNode * head);
     brTreeNode * get_uncle ( brTreeNode * node);
     bool is_left ( brTreeNode * node );

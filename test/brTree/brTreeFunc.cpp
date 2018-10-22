@@ -73,11 +73,11 @@ int brTreeNode :: insert_node(brTreeNode * node, brTreeNode ** head)
         }
         else if( node->key == tmp->key ){ return 1; }
     }
-    rebalance(node, head); 
+    rebalance_insert(node, head); 
     return 0;
 }
 
-int brTreeNode :: rebalance(brTreeNode * node, brTreeNode ** head)
+int brTreeNode :: rebalance_insert(brTreeNode * node, brTreeNode ** head)
 {
     brTreeNode * tmp;
     //printf("--rebalance--%d-%d-%d-\n", node->key, node->parent->color, node->parent->key);
@@ -90,7 +90,7 @@ int brTreeNode :: rebalance(brTreeNode * node, brTreeNode ** head)
         tmp = node; 
         do
         {    
-            tmp = balance_one( tmp, head );
+            tmp = balance_one_red( tmp, head );
             //if( tmp != NULL) { printf("---bo fin--%d--\n", tmp->key); }
             //print_tree(*head);
             //printf("--%d--%d--\n", tmp->key, tmp->color);
@@ -102,7 +102,7 @@ int brTreeNode :: rebalance(brTreeNode * node, brTreeNode ** head)
     return 0;
 }
 
-brTreeNode * brTreeNode :: balance_one(brTreeNode * node, brTreeNode ** head )
+brTreeNode * brTreeNode :: balance_one_red(brTreeNode * node, brTreeNode ** head )
 {
     brTreeNode * uncle;
     //printf("---bo--%d--\n", node->key );
@@ -139,14 +139,14 @@ brTreeNode * brTreeNode :: balance_one(brTreeNode * node, brTreeNode ** head )
     return NULL;
 }
 
-brTreeNode * brTreeNode :: get_uncle ( brTreeNode * node )
+inline brTreeNode * brTreeNode :: get_uncle ( brTreeNode * node )
 {
     if( node -> parent == NULL || node -> parent -> parent == NULL || node == NULL ){ return NULL; }
     if( node -> parent  == node -> parent -> parent -> left ){ return node -> parent -> parent -> right; }
     else { return node -> parent -> parent -> left; }
 }
 
-bool brTreeNode :: is_left ( brTreeNode * node ) //optm
+inline bool brTreeNode :: is_left ( brTreeNode * node ) //optm
 {
     if( node -> parent == NULL ) { return true; }
     if( node -> parent -> left == node ) { return true; }
@@ -154,13 +154,26 @@ bool brTreeNode :: is_left ( brTreeNode * node ) //optm
 }
 
 
-
-int brTreeNode :: delete_node(int key, brTreeNode ** head)
+brTreeNode * brTreeNode :: find_node(int key, brTreeNode * head)
 {
-//#ifdef DEBUG
-//    printf("br tree insert\n");
-//#endif
-    brTreeNode * tmp;
+    brTreeNode * tmp; 
+    tmp =  head;
+    while( tmp != NULL)
+    {
+        if(tmp -> key != key)
+        {
+            if( key > tmp -> key) { tmp = tmp -> right; } 
+            else { tmp = tmp -> left; }
+        }
+        else { return tmp; }
+    }
+    return NULL;
+}
+
+int brTreeNode :: delete_node(brTreeNode * node, brTreeNode ** head)
+{
+    //if()
+
     return 0;
 }
 
@@ -208,7 +221,7 @@ int brTreeNode :: print_tree(brTreeNode * head)
     linklistNode<brTreeNode *> fifo(NULL); 
     brTreeNode * tmp;
     int n = 0;
-    printf("------------------------\n");
+    printf("--------------brTree------------\n");
     if( head == NULL){ printf("null\n"); return 0; }
     fifo.push_back(head);
     fifo.push_back(NULL);
@@ -224,6 +237,7 @@ int brTreeNode :: print_tree(brTreeNode * head)
             if( tmp->right != NULL){ fifo.push_back(tmp->right); }
         } 
     }
+    //printf("--------------brTree------------\n");
 
     return 0; 
 }

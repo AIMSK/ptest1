@@ -11,7 +11,7 @@ int main(int argc, char ** argv)
 #endif
     brNodeFunc brt;
     brTreeNode * head;
-    brTreeNode * tmp2;
+    brTreeNode * tmp;
     head -> init_head(1, &head);
     for(int i = 2; i < 40; i++)
     {
@@ -19,6 +19,8 @@ int main(int argc, char ** argv)
     }
 
     head -> print_tree(head);
+    //tmp = head -> find_node(100, head);
+    //if(tmp == NULL) {printf("no \n");}
     //delete tmp;
     //test1();
     return 0;
