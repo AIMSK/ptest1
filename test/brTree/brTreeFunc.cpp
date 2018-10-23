@@ -158,6 +158,13 @@ inline brTreeNode * brTreeNode :: get_uncle ( brTreeNode * node )
     else { return node -> parent -> parent -> left; }
 }
 
+inline brTreeNode * brTreeNode :: get_sibling ( brTreeNode * node )
+{
+    if( node -> parent == NULL || node == NULL ){ return NULL; }
+    if( node == node -> parent -> left ){ return node -> parent -> right; }
+    else { return node -> parent -> left; }
+}
+
 inline bool brTreeNode :: is_left ( brTreeNode * node ) //optm
 {
     if( node -> parent == NULL ) { return true; }
@@ -186,6 +193,7 @@ int brTreeNode :: delete_node(brTreeNode * node, brTreeNode ** head)
 {
     //if()
     brTreeNode * tmp; 
+    brTreeNode * sib; 
     if( node -> right != NULL && node -> left != NULL ){ tmp = this -> find_hjnode_exchange( node ); }
     if ( tmp -> color == RED )
     {
@@ -193,7 +201,13 @@ int brTreeNode :: delete_node(brTreeNode * node, brTreeNode ** head)
     }
     else
     {
-        if( )
+        sib = this -> get_sibling( tmp );
+        if( sib -> color == BLACK )
+        {
+        }
+        if( sib -> color == RED )
+        {
+        }
     }
     return 0;
 }
@@ -209,13 +223,13 @@ brTreeNode *  brTreeNode :: delete_node_only( brTreeNode * tmp, brTreeNode ** he
     }
     else if( tmp -> right != NULL ) 
     {
-        if( tmp -> parent -> right == tmp) { tmp -> parent -> right = tmp -> right; tmp -> right -> parent = tmp -> parent; delete tmp; }
-        else { tmp -> parent -> left == tmp -> right; tmp -> right -> parent = tmp -> parent; delete tmp; }
+        if( tmp->parent->right == tmp) { tmp->parent->right = tmp->right; tmp->right->parent = tmp->parent; delete tmp; }
+        else { tmp->parent->left == tmp->right; tmp->right->parent = tmp->parent; delete tmp; }
     }
     else if( tmp -> left != NULL )
     {
-        if( tmp -> parent -> right == tmp) { tmp -> parent -> right = tmp -> left; tmp -> left -> parent = tmp -> parent; delete tmp; }
-        else { tmp -> parent -> left == tmp -> left; tmp -> left -> parent = tmp -> parent; delete tmp; }
+        if( tmp->parent->right == tmp) { tmp->parent->right = tmp->left; tmp->left->parent = tmp->parent; delete tmp; }
+        else { tmp->parent->left == tmp->left; tmp -> left->parent = tmp->parent; delete tmp; }
     }
     return node;
 }

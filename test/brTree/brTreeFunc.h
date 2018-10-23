@@ -53,6 +53,7 @@ class brTreeNode
     brTreeNode * balance_one_black (brTreeNode * node, brTreeNode ** head );
     int print_tree(brTreeNode * head);
     brTreeNode * get_uncle ( brTreeNode * node);
+    brTreeNode * get_sibling ( brTreeNode * node);
     bool is_left ( brTreeNode * node );
     brTreeNode * find_hjnode_exchange( brTreeNode * node );
 
