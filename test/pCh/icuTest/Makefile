@@ -91,6 +91,7 @@ SRCS_U = $(wildcard ../common/*.cpp)
 OBJS_U  = $(addprefix ../common/,${OBJS_Uc})
 OBJS_U += $(addprefix ../i18n/,${OBJS_Ui})
 FLAGS_U = -DU_COMMON_IMPLEMENTATION
+FLAGS_U += -DU_I18N_IMPLEMENTATION
 #FLAGS_U += -DU_ICU_DATA_DEFAULT_DIR="../data"
 INCDIR_U = -I../common
 INCDIR_U += -I../i18n
